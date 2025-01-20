@@ -1,3 +1,8 @@
+name: Test casting
+
+on:
+  workflow_dispatch:
+
 jobs:
   testcast:
     name: cast on llvm
