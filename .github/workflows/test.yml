@@ -28,6 +28,6 @@ jobs:
     - name: Checkout Code
       uses: actions/checkout@v4
     - name: Install llvm
-      run: apt install llvm
+      run: sudo apt install llvm
     - name: bitcast to float32 then cast to float16 on LLVM
       run: llc -filetype=obj e.ll -o e.o && clang e.o main.c -o main -rtlib=compiler-rt && ./main
