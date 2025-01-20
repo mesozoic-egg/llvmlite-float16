@@ -67,6 +67,9 @@ half_arr = ctypes.c_uint16 * 1
 
 cfunc = CFUNCTYPE(ctypes.c_void_p, half_arr, half_arr)(func_ptr)
 
+# 17948 is int for the 16 bit value 0x461c
+# IR code extend this to 0x0000461c, then left shift to become 0x461c0000 (float32)
+# Then tries to cast the float32 to float16 and failed
 a = (ctypes.c_uint16 * 1)()
 b = (ctypes.c_uint16 * 1)(17948)
 print(hex(a[0]))

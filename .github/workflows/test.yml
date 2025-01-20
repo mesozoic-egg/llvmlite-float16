@@ -15,8 +15,12 @@ jobs:
       with:
         python-version: 3.12
     - name: Install dependencies
-      run: pip install llvmlite
+      run: |
+        pip install llvmlite
+
     - name: bitcast to float32
       run: python bitcast.py
-    - name: bitcast to float32 then cast to float16
+    - name: bitcast to float32 then cast to float16 on LLVM
+      run: llc -filetype=obj e.ll -o e.o && clang e.o main.c -o main -rtlib=compiler-rt && ./main
+    - name: bitcast to float32 then cast to float16 on LLVM lite
       run: python cast.py
